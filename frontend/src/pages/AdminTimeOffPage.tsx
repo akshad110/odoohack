@@ -226,13 +226,13 @@ export default function AdminTimeOffPage() {
                 type="text"
                 placeholder="Search employees..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
                 className="w-full"
               />
             </div>
             <select
               value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setStatusFilter(e.target.value)}
               className="px-3 py-2 border rounded-md"
             >
               <option value="">All Status</option>
@@ -371,7 +371,7 @@ export default function AdminTimeOffPage() {
                   <label className="block text-sm font-medium mb-2">Comment (Optional)</label>
                   <textarea
                     value={adminComment}
-                    onChange={(e) => setAdminComment(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setAdminComment(e.target.value)}
                     className="w-full min-h-[80px] p-2 border rounded-md"
                     placeholder="Add a comment..."
                   />
