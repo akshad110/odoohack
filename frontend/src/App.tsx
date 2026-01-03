@@ -16,7 +16,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 function AttendancePage() {
   const { user } = useAuth();
   
-  if (user?.role === 'admin') {
+  if (user?.role === 'admin' || user?.role === 'super_admin') {
     return <AdminAttendancePage />;
   }
   
@@ -27,7 +27,7 @@ function AttendancePage() {
 function TimeOffPage() {
   const { user } = useAuth();
   
-  if (user?.role === 'admin') {
+  if (user?.role === 'admin' || user?.role === 'super_admin') {
     return <AdminTimeOffPage />;
   }
   

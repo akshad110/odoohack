@@ -11,7 +11,7 @@ interface User {
   id: string;
   email?: string;
   loginId?: string;
-  role: 'admin' | 'employee';
+  role: 'super_admin' | 'admin' | 'employee';
   firstName?: string;
   lastName?: string;
   avatar?: string;

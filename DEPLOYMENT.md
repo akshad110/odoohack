@@ -2,6 +2,20 @@
 
 This guide will help you deploy DayFlow HRMS to Render.com for free.
 
+## 🎯 Deployment Architecture
+
+**You only need ONE service on Render!** 
+
+The backend is configured to serve both:
+- ✅ API endpoints (`/api/*`)
+- ✅ Frontend React app (all other routes)
+
+This means:
+- **Single URL** for everything (e.g., `https://dayflow-hrms.onrender.com`)
+- **Free tier friendly** - only one service to manage
+- **Simpler deployment** - no CORS issues between services
+- **Lower cost** - one service instead of two
+
 ## Prerequisites
 
 1. A GitHub account with this repository
@@ -69,6 +83,8 @@ JWT_REFRESH_SECRET=your_refresh_secret
 FRONTEND_URL=https://your-app-name.onrender.com
 ```
 
+**Note**: Since you're using a single service, `FRONTEND_URL` should be the same as your Render app URL (the one Render gives you after deployment).
+
 ## Step 5: Deploy
 
 1. Click "Create Web Service"
@@ -77,16 +93,36 @@ FRONTEND_URL=https://your-app-name.onrender.com
 
 ## Important Notes
 
+- **Single Service Setup**: 
+  - ✅ Backend serves API at `/api/*`
+  - ✅ Backend serves frontend at all other routes
+  - ✅ One URL for everything
+  - ✅ No separate frontend service needed
+
 - **Free Tier Limitations**: 
   - Services spin down after 15 minutes of inactivity
   - First request after spin-down may take 30-60 seconds
   - Consider upgrading for production use
 
-- **Build Time**: First build takes longer as it installs all dependencies
+- **Build Time**: First build takes longer as it installs all dependencies (installs both frontend and backend dependencies)
 
-- **CORS**: The backend automatically allows your Render frontend URL
+- **CORS**: Configured to allow your Render app URL automatically
 
-- **Static Files**: The backend serves the React app in production, so you only need one service
+## Alternative: Two Separate Services (Not Recommended for Free Tier)
+
+If you want separate frontend and backend services (not necessary with current setup):
+
+1. **Backend Service**: 
+   - Build: `cd backend && npm install`
+   - Start: `cd backend && npm start`
+   - Set `FRONTEND_URL` to your frontend service URL
+
+2. **Frontend Service** (Static Site):
+   - Build: `cd frontend && npm install && npm run build`
+   - Publish Directory: `frontend/dist`
+   - Set `VITE_API_BASE_URL` to your backend service URL
+
+**Why not recommended**: Costs 2x on free tier, more complex setup, CORS configuration needed.
 
 ## Troubleshooting
 
