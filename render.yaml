@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: dayflow-hrms
+    env: node
+    plan: free
+    buildCommand: npm run install:all && cd backend && npm install && cd ../frontend && npm run build
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_ACCESS_SECRET
+        sync: false
+      - key: JWT_REFRESH_SECRET
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+

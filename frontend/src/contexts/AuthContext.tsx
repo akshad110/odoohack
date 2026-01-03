@@ -1,5 +1,11 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import axios from 'axios';
+import apiConfig from '../config/api';
+
+// Configure axios default base URL
+if (apiConfig.baseURL) {
+  axios.defaults.baseURL = apiConfig.baseURL;
+}
 
 interface User {
   id: string;
